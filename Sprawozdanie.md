@@ -15,7 +15,7 @@ public class WithoutStringBuilder {
 
 }
 ```
-Natomiast drugi z nich stosuje metodę konkatynowania poprzez użycie obiektu klasy `StringBuider`.
+Natomiast drugi z nich stosuje metodę konkatenowania poprzez użycie obiektu klasy `StringBuider`.
 ```java 
 public class WithStringBuilder {
 
@@ -45,12 +45,12 @@ Później wykonywane są instrukcje zapisane w metodzie main:
 `ldc` - wrzuca na stos referencję do stringa word.  
 `invokevirtual #5`  - wywołuje metodę append z klasy StringBuilder i wrzuca na górę stosu referencję do utworzonego obiektu.  
 W tym momencie w pamięci znajdują się 2 referencje do tej samej komórki następuje operacja `pop`.
-Ten sposób konkatynacji dokonuje zmian na referencji i nie tworzy nowej referencji w pamięci.(Nie musiała angażować większej ilości zasobów.)
+Ten sposób konkatenacji dokonuje zmian na referencji i nie tworzy nowej referencji w pamięci.(Nie musiała angażować większej ilości zasobów.)
 Później następuje ponowne pobranie referencji ze zmiennej lokalnej na stos, umieszczenie na stosie stringa("def"), wykonanie metody append oraz usunięcie ze stosu referencji.  
 `return` informuje o zakończeniu się tej metody  
 
 
-Wynik dla algorytmyu, który konkatynował wartości z użyciem operatora `+=`:  
+Wynik dla algorytmyu, który konkatenował wartości z użyciem operatora `+=`:  
 
 ![zdjęcie zadania](WithoutStr.png)
   ### Instrukcje 2
@@ -63,7 +63,65 @@ Później wykonywane są instrukcje zapisane w metodzie main:
 `aload_1` - pobiera referencję ze zmiennej lokalnej stb i wrzuca ją na czubek stosu.  
 `invokedynamic #3,  0` - wywołanie metody knkatenacji łańcucha znaków- tworzy to nową referencję    
 `astore_1` - zdejmuje referencję ze stosu i przypisuje ją do zmiennej lokalnej stb.  
-`return` - informuje o zakończeniu się tej metody  .
+`return` - informuje o zakończeniu się tej metody.  
 
 ### Wnioski 
-Jeżeli zależy nam na jak najlepszej efektywności algorytmu powinniśmy wybrać metodę konkatynacji polegającą na utworzeniu obiektu klasy StringBuilder, zastosowanie tej metody pozwoli zaoszczędzić zasoby pamięci. Ta metoda nie towrzy nowej referencji, nowego obiektu. Wszystkie operacje są wykonywane na jednym obiekcie zapisanym tylko w jednym miejscu w pamięci. Kiedy chcemy użyć operatorów `+=` tworzona jest kolejna referencja do nowego obiektu, a co za tym idzie, przez pewien czas w naszej pamięci znajdują się dwie referencje. Nie jest to potrzebne, ponieważ później jedna zostanie nadpisana przez drugą.
+Jeżeli zależy nam na jak najlepszej efektywności algorytmu powinniśmy wybrać metodę konkatenacji polegającą na utworzeniu obiektu klasy StringBuilder, zastosowanie tej metody pozwoli zaoszczędzić zasoby pamięci. Ta metoda nie towrzy nowej referencji, nowego obiektu. Wszystkie operacje są wykonywane na jednym obiekcie zapisanym tylko w jednym miejscu w pamięci. Kiedy chcemy użyć operatorów `+=` tworzona jest kolejna referencja do nowego obiektu, a co za tym idzie, przez pewien czas w naszej pamięci znajdują się dwie referencje. Nie jest to potrzebne, ponieważ później jedna zostanie nadpisana przez drugą.  
+  
+## Zadanie 2
+W celu wykonania zadania zdekompilowałem w środowisku InteliJ
+```java
+public class Coder {
+    public Coder() {
+    }
+
+    static String code(String var0) {
+            StringBuilder var1 = new StringBuilder();
+//var2.length() - długość 7
+//var0 = 0tWso47
+            for(int var2 = 0; var2 < var0.length(); ++var2) {
+//przesuwanie w tablicy ASCII o 5 indeksów w górę i konkatenacja
+                var1.append((char)(var0.charAt(var2) + 5));
+            }
+//var1 = 5y\xt9<
+        return var1.toString();
+    }
+}
+```
+```java 
+
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
+public class Main {
+    public Main() {
+    }
+
+    public static void main(String[] var0) {
+        if (var0.length != 1) {//var0[] - musi być tablicą jednoelementową
+            System.out.println("Wrong password!");
+        } else {
+            String var1 = var0[0];//wartość na 1 miejscu
+            String[] var2 = var1.split("_");    //var2 - podzielenie wprowadzonej wartości na tablice Stringów.
+            Date var3 = Date.from(Instant.now());     //var3 - pobranie aktualnej daty
+            SimpleDateFormat var4 = new SimpleDateFormat("yyyy");
+            String var5 = var4.format(var3);// var5 - "2020"
+            int var6 = Integer.parseInt(var5); //Zamiana stringa na inta. var6 = 2020
+
+            if (var2[0].length() == 7 && var2[1].length() == 4) {
+                if (var2[0].equals(Coder.code("0tWso47")) && Integer.parseInt(var2[1]) == var6) {
+//   hasło - 5y\xt9<_2020
+                    System.out.println("Good guess");
+                } else {
+                    System.out.println("Wrong password!");
+                }
+            } else {
+                System.out.println("Wrong password!");
+            }
+
+        }
+    }
+}
+
+```
