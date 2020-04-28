@@ -61,9 +61,9 @@ Później wykonywane są instrukcje zapisane w metodzie main:
 `ldc` - wrzuca na stos referencję do stringa stb.  
 `astore_1` - zdejmuje referencję ze stosu i przypisuje ją do zmiennej lokalnej stb. 
 `aload_1` - pobiera referencję ze zmiennej lokalnej stb i wrzuca ją na czubek stosu.  
-`invokedynamic #3,  0` - wywołanie metody knkatenacji łańcucha znaków- tworzy to nową referencję  
-`astore_1` - zdejmuje referencję ze stosu i przypisuje ją do zmiennej lokalnej stb. 
-`return` informuje o zakończeniu się tej metody  
+`invokedynamic #3,  0` - wywołanie metody knkatenacji łańcucha znaków- tworzy to nową referencję    
+`astore_1` - zdejmuje referencję ze stosu i przypisuje ją do zmiennej lokalnej stb.  
+`return` informuje o zakończeniu się tej metody  .
 
 ### Wnioski 
 Jeżeli zależy nam na jak najlepszej efektywności algorytmu powinniśmy wybrać metodę konkatynacji polegającą na utworzeniu obiektu klasy StringBuilder, zastosowanie tej metody pozwoli zaoszczędzić zasoby pamięci. Ta metoda nie towrzy nowej referencji, nowego obiektu. Wszystkie operacje są wykonywane na jednym obiekcie zapisanym tylko w jednym miejscu w pamięci. Kiedy chcemy użyć operatorów `+=` tworzona jest kolejna referencja do nowego obiektu, a co za tym idzie, przez pewien czas w naszej pamięci znajdują się dwie referencje. Nie jest to potrzebne, ponieważ później jedna zostanie nadpisana przez drugą.
