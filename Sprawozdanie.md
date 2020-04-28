@@ -69,25 +69,7 @@ Jeżeli zależy nam na jak najlepszej efektywności algorytmu powinniśmy wybra�
   
 ## Zadanie 2
 W celu wykonania zadania zdekompilowałem otrzymane pliki w środowisku IntelliJ. Aby odszyfrować hasło przeanalizowałem kod dwóch klas programu. Dodałem również komentarze w miejscach, które mogą być niejasne.  
-Klasa Coder:  
-```java
-public class Coder {
-    public Coder() {
-    }
 
-    static String code(String var0) {
-            StringBuilder var1 = new StringBuilder();
-//var2.length() - długość 7
-//var0 = 0tWso47
-            for(int var2 = 0; var2 < var0.length(); ++var2) {
-//przesuwanie w tablicy ASCII o 5 indeksów w górę i konkatenacja
-                var1.append((char)(var0.charAt(var2) + 5));
-            }
-//var1 = 5y\xt9<
-        return var1.toString();
-    }
-}
-```
 Klasa Main:  
 ```java 
 
@@ -126,6 +108,27 @@ public class Main {
 }
 
 ```
+
+Klasa Coder:  
+```java
+public class Coder {
+    public Coder() {
+    }
+
+    static String code(String var0) {
+            StringBuilder var1 = new StringBuilder();
+//var2.length() - długość 7
+//var0 = 0tWso47
+            for(int var2 = 0; var2 < var0.length(); ++var2) {
+//przesuwanie w tablicy ASCII o 5 indeksów w górę i konkatenacja
+                var1.append((char)(var0.charAt(var2) + 5));
+            }
+//var1 = 5y\xt9<
+        return var1.toString();
+    }
+}
+```
+
 Po przeanalizowaniu można wywnioskować, że hasłem naszego programu będzie `5y\xt9<_2020`.  
 Hasło to jest generowane w następujący sposób:  
 Metoda `main` przyjmuje tablicę Stringów. Tablica musi mieć jeden element(inaczej program wyświetli komunikat "wrong password"). Następnie ta wartość jest pobierana i dzielona metodą spilt po znaku "_", tworzy się w ten sposób tablica var2[]. Po tym kroku następuje pobranie aktualnej daty i poprzez wywołanie metody `format` uzyskanie wartości zmiennej var6 = 2020 - aktualny rok. Warunek sprawdza czy wartość na pierwszym miejscu w podzielonej wcześniej tablicy(var2[0]) ma długość 7 oraz czy wartość na drugim miejscu tablicy(var[1]) ma długość 4(zgadza się to z długością Stringa "2020"). W kolejnym warunku sprawdzamy czy zmienna podana w tablicy var2[1] jest równa var6(var6 zawiera aktualny rok, w tym momencie już wiemy że nasze hasło musi przyjąć formę ..._2020...). W tym samym warunku sprawdzane jest też czy podana przez nas wartość zapisana w var2[0] jest równa temu samemu co zwraca metoda `code`(od wartości 0tWso47). Metoda `code` zamienia wszystkie znaki podanego Stringa na zmienne typu char dodaje do ich wartości 5 oraz ponownie odczytuje wartość z tabeli ASCII dla nowopowstałych wartości. Wartości po konkatenacji są zapisane w zmiennej var1, która jest zwracana. Dla podanego ciągu znaków (`0tWso47`) metoda zwróci `5y\xt9<`. Czyli nasze hasło przyjmie postać `5y\xt9<_2020`.* Warto podkreślić że hasło po dodaniu kolejnego znaku " _ " oraz wprowadzeniu kolejnego ciągu znaków na przykład `5y\xt9<_2020_costam` również zostanie zaakceptowane.  
