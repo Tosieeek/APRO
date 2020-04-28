@@ -15,7 +15,7 @@ public class WithoutStringBuilder {
 
 }
 ```
-Natomiast drugi z nich stosuje metodę konkatynowania poprzez użycie obiektu klasy `StringBuider`.
+Natomiast drugi z nich stosuje metodę konkatynowania poprzez użycie obiektu klasy ```StringBuider```.
 ```java 
 public class WithStringBuilder {
 
