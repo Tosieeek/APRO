@@ -68,7 +68,7 @@ Później wykonywane są instrukcje zapisane w metodzie main:
 Jeżeli zależy nam na jak najlepszej efektywności algorytmu powinniśmy wybrać metodę konkatenacji polegającą na utworzeniu obiektu klasy StringBuilder, zastosowanie tej metody pozwoli zaoszczędzić zasoby pamięci. Ta metoda nie towrzy nowej referencji, nowego obiektu. Wszystkie operacje są wykonywane na jednym obiekcie zapisanym tylko w jednym miejscu w pamięci. Kiedy chcemy użyć operatorów `+=` tworzona jest kolejna referencja do nowego obiektu, a co za tym idzie, przez pewien czas w naszej pamięci znajdują się dwie referencje. Nie jest to potrzebne, ponieważ później jedna zostanie nadpisana przez drugą.  
   
 ## Zadanie 2
-W celu wykonania zadania zdekompilowałem otrzymane pliki w środowisku IntelliJ. Aby odszyfrować hsło przeanalizowałem kod dwóch klas programu. Dodałem również komentarze w miejscach, które mogą być niejasne.  
+W celu wykonania zadania zdekompilowałem otrzymane pliki w środowisku IntelliJ. Aby odszyfrować hasło przeanalizowałem kod dwóch klas programu. Dodałem również komentarze w miejscach, które mogą być niejasne.  
 Klasa Coder:  
 ```java
 public class Coder {
