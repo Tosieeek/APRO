@@ -32,3 +32,8 @@ public class WithStringBuilder {
 W celu przeanalizowania działania obu algorytmów posłużyłem się programem `javap`, który umożliwia deasemblację plików .class. 
 Wynik dla algorytmu w którym implementowałem StringBuilder:   
 ![zdjęcie zadania](WithStr.png)
+  
+    
+      
+Wynik dla algorytmyu, który konkatynował wartości z użyciem operatora `+=`:  
+![zdjęcie zadania](WithoutStr.png)
